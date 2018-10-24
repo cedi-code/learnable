@@ -1,0 +1,50 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary: #6638C0;
+$primary2: #C0495E;
+$primaryDark: #250F4F;
+
+$primary-invert:  #E7CBE7;
+
+
+$colors: (
+        "white": ($white, $black),
+        "black": ($black, $white),
+        "light": ($light, $light-invert),
+        "dark": ($dark, $dark-invert),
+        "primary": ($primary, $primary-invert),
+        "info": ($info, $info-invert),
+        "success": ($success, $success-invert),
+        "warning": ($warning, $warning-invert),
+        "danger": ($danger, $danger-invert),
+
+);
+
+
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+
+body {
+  background-color: $primaryDark;
+  height: 100vh;
+}
+.navbar {
+
+}
+a {
+  color:$primary2;
+}
