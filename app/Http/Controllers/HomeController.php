@@ -27,9 +27,11 @@ class HomeController extends Controller
     {
         $mytime = Carbon::now();
         $events = app('App\Http\Controllers\EventController')->index($request);
+        $lessons = app('App\Http\Controllers\LessonController')->index($request);
         $data = [
             "time" =>  $mytime->toDateTimeString(),
             "events" => $events,
+            "lessons" => $lessons,
             "id" =>  Auth::user()->id
         ];
         return view('home')->with($data);
