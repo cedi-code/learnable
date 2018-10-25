@@ -122,7 +122,7 @@ Route::group([
             Route::get('/{lessons}', 'LessonController@show');
 
             Route::patch('/{id}', 'LessonController@update')->middleware('isTeacher');
-
+            Route::get('/week/{id}','LessonController@getWeek');
 
 
 

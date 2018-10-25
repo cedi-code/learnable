@@ -44,16 +44,55 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
+                @if (Auth::guest())
+                        <ul class="navbar-end">
+                            <b-dropdown position="is-bottom-left">
+                                <a class="navbar-item" slot="trigger">
+                                    <span>Login</span>
+                                    <b-icon icon="menu-down"></b-icon>
+                                </a>
 
+                                <b-dropdown-item custom paddingless>
+                                    <form method="POST" action="{{ route('login') }}">
+                                        {{ csrf_field() }}
+                                        <div class="modal-card" style="width:300px;">
+                                            <section class="modal-card-body">
+                                                <b-field label="E-Mail Adress"
+                                                         type="{{ $errors->has('email') ? ' is-danger' : '' }}"
+                                                         message="{{ $errors->has('email') ? $errors->first('email') : '' }}">
+                                                    <b-input
+                                                            placeholder="example@bwdbern.ch" id="email" name="email" value="{{ old('email') }}" type="email" required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-field label="Password"
+                                                         type="{{ $errors->has('password') ? ' is-danger' : '' }}"
+                                                         message="{{ $errors->has('password') ?  $errors->first('password') : '' }}"
+                                                >
+                                                    <b-input
+                                                            id="password" name="password" type="password"
+                                                            password-reveal required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-checkbox {{ old('remember') ? 'checked' : '' }}>Remember me</b-checkbox>
+                                            </section>
+                                            <footer class="modal-card-foot">
+                                                <button type="submit" class="button is-primary">Login</button>
+                                            </footer>
+                                        </div>
+                                    </form>
+                                </b-dropdown-item>
+                            </b-dropdown>
+                        </ul>
+                        <!--<li class="navbar-item"><a href="{{ route('register') }}">Register</a></li> -->
+                @else
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-start">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li class="navbar-item"><a href="{{ route('login') }}">Login</a></li>
-                            <li class="navbar-item"><a href="{{ route('register') }}">Register</a></li>
-                        @else
+
                             <li class="navbar-item">
-                                <a href="#"   aria-expanded="false">
+                                <a href="{{ route('home') }}"   aria-expanded="false">
                                     {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
@@ -93,19 +132,23 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="navbar-item">
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        @endif
+
                     </ul>
+                    <ul class="navbar-end">
+                        <li class="navbar-item">
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                    @endif
                 </div>
         </nav>
 

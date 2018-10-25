@@ -43,12 +43,11 @@
                         <div class="tile is-vertical is-1.5">
                             <div class="tile">
                                 <div class="tile is-parent is-vertical">
-                                    @for ($d = 0; $d < count($lessons); $d++)
                                     <article class="tile is-child notification is-primary">
                                         <p class="title">Vertical...</p>
                                         <p class="subtitle">Top tile</p>
+
                                     </article>
-                                    @endfor
                                     <article class="tile is-child notification is-warning">
                                         <p class="title">...tiles</p>
                                         <p class="subtitle">Bottom tile</p>

@@ -50,7 +50,44 @@ class LessonController extends Controller
     public function getRaw() {
         return Lessons::all();
     }
+    public function getWeek(Request $request,$id) {
+        $y = date("Y");
+        $monday = $this->getWeekDates($y,$id,true);
+        $sunday = $this->getWeekDates($y,$id,false);
 
+        if($request->user()->is_teacher) {
+            return Lessons::where('teacher',$request->user()->id)
+                ->where('start', '>', $monday)
+                ->where('end', '<=',$sunday )
+                ->get();
+        }else  {
+            $data2 = [];
+            $classes =  Classmembers::select('class')->where("pupil", $request->user()->id)->get();
+            foreach($classes as $class) {
+                array_push($data2, $class->class);
+            }
+
+            return Lessons::whereIn('class',$data2)
+                ->where('start', '>', $monday)
+                ->where('end', '<=',$sunday )
+                ->get();
+        }
+
+
+    }
+
+    function getWeekDates($year, $week, $start=true)
+    {
+        $from = date("Y-m-d", strtotime("{$year}-W{$week}-1")); //Returns the date of monday in week
+        $to = date("Y-m-d", strtotime("{$year}-W{$week}-7"));   //Returns the date of sunday in week
+
+        if($start) {
+            return $from;
+        } else {
+            return $to;
+        }
+        //return "Week {$week} in {$year} is from {$from} to {$to}.";
+    }
     /**
      * Show the form for creating a new resource.
      *
