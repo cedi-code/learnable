@@ -120,15 +120,15 @@
                                 </a>
                             </li>
                             <li class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-item">
+                                <a class="navbar-item" href="{{ route('class') }}">
                                     Klassen
                                 </a>
                                 <ul class="navbar-dropdown">
                                     <li class="navbar-item">
-                                        <a>IM16A</a>
+                                        <a href="{{ route('class') }}">IM16A</a>
                                     </li>
                                     <li class="navbar-item">
-                                        <a>Lehrkräfte</a>
+                                        <a href="{{ route('teachers')}}">Lehrkräfte</a>
                                     </li>
                                 </ul>
                             </li>

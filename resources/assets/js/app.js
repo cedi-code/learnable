@@ -24,7 +24,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('logo-anim', require('./components/intro.vue'));
 Vue.component('user-tile', require('./components/userTile.vue'));
 Vue.component('termin-box', require('./components/terminBox'));
-
+Vue.component('table-box', require('./components/table'));
 const app = new Vue({
     el: '#app'
 });

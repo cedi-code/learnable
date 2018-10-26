@@ -26,3 +26,17 @@ Route::domain('api.learnable.ch')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/class', 'ClassmemberViewController@index')->name('class');
+Route::get('/teachers', 'TeacherController@table')->name('teachers');
+
+Route::group([
+    'middleware' => 'isAdmin'
+], function (){
+    Route::prefix('edit')->group(function () {
+       Route::get('/user/{user}', 'UserController@edit')->name('edituser');
+        Route::post('/user/{id}', 'UserController@update')->name('updateuser');
+    });
+
+
+});

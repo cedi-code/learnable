@@ -19,4 +19,9 @@ class TeacherController extends Controller
             return 0;
         }
     }
+    public function table() {
+        $teachers = User::where('is_teacher', 1)->get();
+
+        return view('teachers')->with('teachers',$teachers);
+    }
 }
