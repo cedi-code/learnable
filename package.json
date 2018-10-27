@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "buefy": "^0.7.0",
+    "materialize-css": "^1.0.0",
     "vue-lottie": "^0.2.1"
   }
 }

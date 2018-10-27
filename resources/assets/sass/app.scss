@@ -6,7 +6,9 @@
 @import "variables";
 
 // Bootstrap
-//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
 
 
 @import "~bulma/sass/utilities/_all";
@@ -36,6 +38,7 @@ $colors: (
 
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+@import "~materialize-css/dist/css/materialize";
 
 
 body {
