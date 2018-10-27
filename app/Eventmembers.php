@@ -15,7 +15,10 @@ class Eventmembers extends Model
     protected $fillable = [
         'user', 'event'
     ];
-
+    public function userdata()
+    {
+        return $this->belongsTo(User::class,  'user');
+    }
 
     const UPDATED_AT = null;
     const CREATED_AT = null;

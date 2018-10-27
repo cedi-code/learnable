@@ -99,7 +99,7 @@
 
                             </li>
                             <li class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-item">
+                                <a href="{{ route('eventlist') }}" class="navbar-item">
                                     Termine
                                 </a>
                                 <ul class="navbar-dropdown">
@@ -110,7 +110,7 @@
                                         <a> Gruppe Erstellen</a>
                                     </li>
                                     <li class="navbar-item">
-                                        <a> Liste</a>
+                                        <a href="{{ route('eventlist') }}"> Liste</a>
                                     </li>
                                 </ul>
                             </li>

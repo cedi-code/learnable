@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events;
 use App\Eventmembers;
+use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
@@ -151,5 +152,11 @@ class EventController extends Controller
         return response()->json([
             'message' => 'Successfully deleted event!'
         ], 200);
+    }
+    public function delete($id)
+    {
+        $event= Events::find($id);
+        $event->delete();
+        return Redirect::back()->withErrors(['msg', 'Errinerung wurde gelöscht']);
     }
 }

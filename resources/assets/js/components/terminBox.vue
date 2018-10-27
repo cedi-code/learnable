@@ -24,8 +24,15 @@
             </div>
             <footer class="card-footer">
                 <a class="card-footer-item">Stundenplan</a>
-                <a v-if="isCreator" class="card-footer-item">Edit</a>
-                <a v-if="isCreator" class="card-footer-item">Delete</a>
+                <a class="card-footer-item" v-if="!isCreator">Entfernen</a>
+
+                <a  v-if="isCreator" :href="'events/edit/' + this.id" class="card-footer-item">Edit</a>
+
+                <form v-if="isCreator" method="POST" id="deleteFrom" class="card-footer-item" :action="'/events/delete/' + this.id">
+                    <input type="hidden" name="_token" :value="csrf">
+                    <a  @click="confirmCustomDelete"   >Delete</a>
+                </form>
+
             </footer>
         </b-collapse>
 
@@ -38,6 +45,7 @@
         data () {
             return {
                 showDetail : false,
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
         props: {
@@ -49,7 +57,27 @@
             isCreator: {
                 default: false,
                 type: Boolean
+            },
+            id: {
+                type: Number
             }
+        },
+        methods: {
+            confirmCustomDelete() {
+                this.$dialog.confirm({
+                    title: 'Errinnerung Löschen',
+                    message: 'Are you sure you want to <b>delete</b> this event?',
+                    confirmText: 'Löschen',
+                    type: 'is-danger',
+                    onConfirm: () => this.deleteSubmit()
+                })
+            },
+            deleteSubmit() {
+                document.getElementById("deleteFrom").submit();
+                this.$toast.open('Errinnerung wird gelöscht...')
+
+            }
+
         }
     }
 </script>

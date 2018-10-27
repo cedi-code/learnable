@@ -29,6 +29,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/class', 'ClassmemberViewController@index')->name('class');
 Route::get('/teachers', 'TeacherController@table')->name('teachers');
+Route::prefix('events')->group(function () {
+    Route::get('/', 'EventViewController@index')->name('eventlist');
+    Route::get('edit/{id}', 'EventViewController@edit');
+    Route::get('edit/{id}', 'EventViewController@edit');
+    Route::post('delete/{id}', 'EventController@delete');
+});
 
 Route::get('/changePW', 'UserController@editPW')->name('editpw');
 Route::post('/changePW', 'UserController@updatePW')->name('updatepw');

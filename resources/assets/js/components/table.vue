@@ -83,7 +83,7 @@
         },
         props: {
             isAdmin: {
-                type: Boolean,
+
                 default: false
             },
             showId: {
