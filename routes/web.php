@@ -30,6 +30,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/class', 'ClassmemberViewController@index')->name('class');
 Route::get('/teachers', 'TeacherController@table')->name('teachers');
 
+Route::get('/changePW', 'UserController@editPW')->name('editpw');
+Route::post('/changePW', 'UserController@updatePW')->name('updatepw');
+
 Route::group([
     'middleware' => 'isAdmin'
 ], function (){

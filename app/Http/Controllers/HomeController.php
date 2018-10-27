@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $mytime = Carbon::now();
         $events = app('App\Http\Controllers\EventController')->index($request);
         $lessons = app('App\Http\Controllers\LessonController')->index($request);
+
         $data = [
             "time" =>  $mytime->toDateTimeString(),
             "events" => $events,

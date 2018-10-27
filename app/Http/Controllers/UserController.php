@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
-    public $rules = array(
+    protected $rules = array(
         'id' => 'required|int',
         'username' => 'required|string',
         'first_name' => 'required|string',
@@ -42,5 +46,37 @@ class UserController extends Controller
         ]);
 
         return Redirect::back()->with($event_succ);
+    }
+
+    public function editPW() {
+        return view('auth.passwords.update');
+    }
+
+    public function updatePW(Request $request) {
+        $this->validate($request, $this->rulesPW(), $this->validationErrorMessages());
+        $filterdRequest = $this->credentials($request);
+        $password =  Hash::make($filterdRequest['password']);
+        User::where('id',Auth::user()->id)
+            ->update(['password' => $password] );
+
+        return Redirect::route('home',  array('pw=ok'));
+
+    }
+
+    protected function rulesPW()
+    {
+        return [
+            'password' => 'required|confirmed|min:6',
+        ];
+    }
+    protected function credentials(Request $request)
+    {
+        return $request->only(
+             'password', 'password_confirmation' //, 'token'
+        );
+    }
+    protected function validationErrorMessages()
+    {
+        return [];
     }
 }

@@ -4,8 +4,9 @@
 <div class="container">
     <div class="tile is-ancestor">
         <div class="tile is-vertical is-4">
-            <user-tile>
-                <template slot="title">{{ Auth::user()->username }}</template>
+            <user-tile @if(Request::get('pw')) :change-pw="true" @endif>
+
+                <template slot="title">{{ Auth::user()->username }} </template>
                 <template slot="under-title">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</template>
             </user-tile>
             <div class="tile is-parent">
@@ -27,7 +28,7 @@
                             @endfor
 
 
-
+                        </div>
                     </div>
                 </article>
             </div>
