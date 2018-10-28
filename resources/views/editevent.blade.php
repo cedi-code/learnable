@@ -7,7 +7,7 @@
         <div class="panel-heading">Change Event: {{ $event->title }}</div>
 
         <div class="notification">
-            <form class="form-horizontal" method="POST" action="">
+            <form class="form-horizontal" method="POST" action="/events/edit/{{$event->id}}">
                 {{ csrf_field() }}
 
                 <input type="hidden" name="id" value="{{ $event->id }}">
@@ -26,7 +26,7 @@
                              message="{{ $errors->has('lesson') ? $errors->first('lesson') : '' }}"
 
                     >
-                        <b-input id="title" placeholder="Prüfung" type="text" name="title" value="{{$event->lesson}}" required disabled></b-input>
+                        <b-input id="lesson" placeholder="1" type="text" name="lesson" value="{{$event->lesson}}" required  readonly></b-input>
                     </b-field>
 
                 </div>
@@ -45,7 +45,7 @@
                     <b-field label="Description"
                              type="{{ $errors->has('description') ? ' is-danger' : '' }}"
                              message="{{ $errors->has('description') ? $errors->first('description') : '' }}">
-                        <b-input maxlength="255" type="textarea" value="{{$event->description}}"></b-input>
+                        <b-input maxlength="255" name="description" type="textarea" value="{{$event->description}}"></b-input>
                     </b-field>
                 </div>
 

@@ -32,7 +32,7 @@ Route::get('/teachers', 'TeacherController@table')->name('teachers');
 Route::prefix('events')->group(function () {
     Route::get('/', 'EventViewController@index')->name('eventlist');
     Route::get('edit/{id}', 'EventViewController@edit');
-    Route::get('edit/{id}', 'EventViewController@edit');
+    Route::post('edit/{id}', 'EventViewController@update');
     Route::post('delete/{id}', 'EventController@delete');
 });
 

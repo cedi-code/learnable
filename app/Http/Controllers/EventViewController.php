@@ -8,6 +8,8 @@ use App\Events;
 use App\Eventmembers;
 use App\Event_types;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class EventViewController extends Controller
 {
@@ -61,5 +63,60 @@ class EventViewController extends Controller
             "members" => $members
         ];
         return view('editevent')->with($data);
+    }
+
+    public function update(Request $request,$id) {
+
+        if(Events::find($id)->creator == $request->user()->id ||$request->user()->is_admin ) {
+
+
+        // TODO bearbeite mues no gah vom Event!!!
+
+            Events::where("id", $id)->update([
+                'type' => $request->type,
+                'lesson' => $request->lesson,
+                'title' => $request->title,
+                'description' => $request->description
+            ]);
+
+        $eventM = Eventmembers::select('user')->where("event", $id)->get();
+        $newuid = explode(",", $request->members);
+        if(count($newuid) != count($eventM)) {
+
+            // checks if a members is removed
+            $olduid = [];
+
+            for($m = 0; $m < count($eventM); $m++) {
+                $olduid[$m] = $eventM[$m]->user;
+                if(!in_array($olduid[$m], $newuid)) {
+                    // TODO i ha no ka wiä me e clusterd primary key cha lösche....
+
+                    $query = "DELETE FROM `eventmembers` WHERE `event`=$id AND `user`=$olduid[$m]";
+                    DB::delete($query);
+                }
+
+            }
+
+            // checks if a member is added!
+            for($m = 0; $m < count($newuid); $m++ ) {
+                if(!in_array($newuid[$m],$olduid )) {
+
+                    $eventmember = new Eventmembers([
+                        'user' => $newuid[$m],
+                        'event' => $id
+
+                    ]);
+                    $eventmember->save();
+                }
+
+            }
+
+            }
+            return Redirect::route('home',  array('edit=ok'));
+        }else {
+            return null;
+        }
+
+
     }
 }

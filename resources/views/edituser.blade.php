@@ -6,7 +6,7 @@
         <div class="panel-heading">Change User: {{ $user->first_name  }} {{ $user->last_name}}</div>
 
         <div class="notification">
-            <form class="form-horizontal" method="POST" action="/edit/user/{{$user->id}}">
+            <form class="form-horizontal" method="POST" action="{{$user->id}}">
                 {{ csrf_field() }}
 
                 <input type="hidden" name="id" value="{{ $user->id }}">

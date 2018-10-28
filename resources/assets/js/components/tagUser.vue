@@ -8,8 +8,9 @@
                     field="last_name"
                     icon="label"
                     placeholder="Add a User"
-                    @typing="getFilteredTags">
-                <template slot-scope="props">
+                    @typing="getFilteredTags"
+                    @blur="addMemebers">
+                <template slot-scope="props" @click="test()">
                     <strong>{{props.option.username}}</strong>: {{props.option.first_name}} {{props.option.last_name}}
                 </template>
                 <template slot="empty">
@@ -18,7 +19,7 @@
             </b-taginput>
         </b-field>
         <!-- TODO bei den tags nur ein Array von Ids zu value geben! -->
-        <input type="hidden" name="tags" v-bind:value="tags"/>
+        <input id="members" type="hidden"  name="members" value=""/>
     </section>
 </template>
 
@@ -45,7 +46,21 @@
             console.log(this.users[0].userdata);
         },
         methods: {
+            test: function () {
+              console.log("clicked!!!!")
+            },
+            addMemebers: function() {
 
+                var data = [];
+                if(this.tags.length > 0) {
+                    for(var i = 0; i < this.tags.length; i++) {
+                        data.push(this.tags[i].id);
+                    }
+                }
+                document.getElementById('members').value = data;
+
+
+            },
             getFilteredTags(text) {
                 this.filteredTags = this.users.filter((option) => {
                     return option.first_name

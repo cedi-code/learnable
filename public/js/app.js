@@ -71474,6 +71474,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71498,6 +71499,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        test: function test() {
+            console.log("clicked!!!!");
+        },
+        addMemebers: function addMemebers() {
+
+            var data = [];
+            if (this.tags.length > 0) {
+                for (var i = 0; i < this.tags.length; i++) {
+                    data.push(this.tags[i].id);
+                }
+            }
+            document.getElementById('members').value = data;
+        },
         getFilteredTags: function getFilteredTags(text) {
             this.filteredTags = this.users.filter(function (option) {
                 return option.first_name.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
@@ -71531,7 +71545,7 @@ var render = function() {
                 icon: "label",
                 placeholder: "Add a User"
               },
-              on: { typing: _vm.getFilteredTags },
+              on: { typing: _vm.getFilteredTags, blur: _vm.addMemebers },
               scopedSlots: _vm._u([
                 {
                   key: "default",
@@ -71569,8 +71583,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "hidden", name: "tags" },
-        domProps: { value: _vm.tags }
+        attrs: { id: "members", type: "hidden", name: "members", value: "" }
       })
     ],
     1
