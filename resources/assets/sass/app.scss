@@ -39,15 +39,92 @@ $colors: (
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 /*@import "~materialize-css/dist/css/materialize"; */
-
-
+/* shadows */
+/* https://codepen.io/callmeashish/pen/qPYWyw */
 body {
   background-color: $primaryDark;
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+h1, h2 {
+  font-weight: lighter;
+}
+h1 {
+  letter-spacing: -1.5;
+  font-size: 96px;
+}
+h2 {
+  letter-spacing: -0.5;
+  font-size: 60px;
+}
+.th-wrap {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+.notification {
+  border-radius: 0px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.panel-heading {
+  border-radius: 0px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.navbar {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.dropdown-content {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 0px;
+}
+.navbar-dropdown {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 0px;
+}
+.modal-card {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.modal-card-head {
+  border-radius: 0px;
+}
+.modal-card-foot {
+  border-radius: 0px;
+}
+span {
+  font-size: 14px;
+  letter-spacing: 0.25px;
+}
+input {
+  border-radius: 0px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-color: $primary !important;
+  color: $primary !important;
+  border-style: solid !important;
+  border-width: 0px 0px 2px 0px !important;
+  padding-bottom: 10px ;
+  margin-bottom: 10px;
+
+
+}
+button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  font-weight: normal;
+  text-transform: uppercase;
+
+}
+.input {
+
 }
 .navbar {
 
 }
 a {
   color:$primary2;
+
 }
+
+
+
