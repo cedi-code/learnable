@@ -28,7 +28,13 @@ class EventMemberController extends Controller
         $eventOwner = Events::select('id')->where("creator", $request->user()->id)->get();
         foreach ($eventOwner as $eventO) {
 
-
+            $eventM = Eventmembers::select('user')->where("event", $eventO->id)->get();
+            if(count($eventM) > 0) {
+                $data2[] = [
+                    'event' => $eventO->id,
+                    'members' => $eventM
+                ];
+            }
 
         }
 
