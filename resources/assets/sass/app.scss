@@ -8,10 +8,12 @@
 // Bootstrap
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Buefy
+// @import "~bulma";
+// @import "~buefy/src/scss/buefy";
+// @import "~bulma/sass/utilities/_all";
 
-
-
-@import "~bulma/sass/utilities/_all";
+@import "~materialize-css/sass/materialize";
 
 // Set your colors
 $primary: #6638C0;
@@ -21,33 +23,78 @@ $primaryDark: #250F4F;
 $primary-invert:  #E7CBE7;
 
 
-$colors: (
-        "white": ($white, $black),
-        "black": ($black, $white),
-        "light": ($light, $light-invert),
-        "dark": ($dark, $dark-invert),
-        "primary": ($primary, $primary-invert),
-        "info": ($info, $info-invert),
-        "success": ($success, $success-invert),
-        "warning": ($warning, $warning-invert),
-        "danger": ($danger, $danger-invert),
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
-);
-
-
-
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
-@import "~materialize-css/dist/css/materialize";
-
+i.icon-white {
+  color: #fefefe !important;
+}
 
 body {
-  background-color: $primaryDark;
-  height: 100vh;
+  background-color: #FEFEFE;
 }
-.navbar {
 
+.primary-text {
+  color: $primary !important;
 }
+
+.secondary-text {
+  color: $primary2 !important;
+}
+
+.primary-text-dark {
+  color: $primaryDark !important;
+}
+
+.primary-color {
+  background-color: $primary !important;
+}
+
+.secondary-color {
+  background-color: $primary2 !important;
+}
+
+.primary-color-dark {
+  background-color: $primaryDark !important;
+}
+
 a {
   color:$primary2;
+}
+
+/* label focus color */
+.primary-input-field input[type=email]:focus + label {
+  color: $primary2 !important;
+  i.prefix {
+    color: $primary2 !important;
+  }
+}
+.primary-input-field input[type=password]:focus + label {
+  color: $primary2 !important;
+  i.prefix {
+    color: $primary2 !important;
+  }
+}
+.primary-input-field input[type=text]:focus + label {
+  color: $primary2 !important;
+  i.prefix {
+    color: $primary2 !important;
+  }
+}
+.primary-input-field input[type=password]:focus {
+  border-bottom: 1px solid $primary2 !important;
+  box-shadow: 0 1px 0 0 $primary2 !important;
+}
+.primary-input-field input[type=email]:focus {
+  border-bottom: 1px solid $primary2 !important;
+  box-shadow: 0 1px 0 0 $primary2 !important;
+}
+.primary-input-field input[type=text]:focus {
+  border-bottom: 1px solid $primary2 !important;
+  box-shadow: 0 1px 0 0 $primary2 !important;
 }
