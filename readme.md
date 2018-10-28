@@ -20,9 +20,9 @@ if problems show up running the ``` npm run watch ``` command, <br />**_follow t
 
 <br/>
 1. Open the Terminal and go to the Project folder
+
 2. Run: ``` npm run rebuild ```
-<br/>
-<br/>
+
 And at the end, the command 
 
 
