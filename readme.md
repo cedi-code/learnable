@@ -11,7 +11,7 @@ _if problems show up while running the ``` php artisan serve ``` command,_<br />
 <br/>
 <br/>
 And at the end the command 
-``` php artisan serve``` 
+``` php artisan serve ``` 
 should work!
 
 <br/>
@@ -20,7 +20,6 @@ if problems show up running the ``` npm run watch ``` command, <br />**_follow t
 
 <br/>
 1. Open the Terminal and go to the Project folder
-
 2. Run: ``` npm rebuild ```
 
 And at the end, the command 
