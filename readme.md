@@ -14,13 +14,19 @@ And at the end the command
 ``` php artisan serve``` 
 should work!
 
-if problems show up running the ``` npm run watch ```command,_<br />**_follow these steps:_**
+<br/>
+
+if problems show up running the ``` npm run watch ``` command, <br />**_follow these steps:_**
 
 <br/>
 1. Open the Terminal and go to the Project folder
-2. Run: ``` npm rebuild ```
+2. Run: ``` npm run rebuild ```
 <br/>
 <br/>
 And at the end, the command 
+
+
 ``` npm run watch ``` 
+
+
 should work!
