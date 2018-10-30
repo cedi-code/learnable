@@ -6,11 +6,11 @@
         <template slot-scope="props">
 
             <b-table-column field="last_name" label="Id" width="60">
-                {{ props.row.userdata.username }}
+                {{ props.row.username }}
             </b-table-column>
 
             <b-table-column field="first_name" label="Name">
-                {{ props.row.userdata.last_name }} {{ props.row.userdata.first_name }}
+                {{ props.row.last_name }} {{ props.row.first_name }}
             </b-table-column>
 
 
@@ -24,23 +24,6 @@
                     <p>Nothing here.</p>
                 </div>
             </section>
-        </template>
-        <template slot="footer" >
-            <div class="has-text-right ">
-
-                <a class="button is-danger" >
-                    <b-icon icon="minus"></b-icon>
-                    <span>Remove Members</span>
-                </a>
-
-                <a class="button is-success" >
-                    <b-icon icon="plus"></b-icon>
-                    <span>Add Members</span>
-                </a>
-
-
-
-            </div>
         </template>
     </b-table>
 </template>

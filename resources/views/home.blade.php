@@ -21,7 +21,7 @@
 
                             @for ($i = 0; $i < count($events); $i++)
 
-                                <termin-box title="{{$events[$i]["event"]["attributes"]["title"]}}" @if ($events[$i]["event"]["attributes"]["creator"] == $id) :is-creator="true" @endif>
+                                <termin-box title="{{$events[$i]["event"]["attributes"]["title"]}}" @if ($events[$i]["event"]["attributes"]["creator"] == $id) :is-creator="true" :id="{{$events[$i]["event"]["attributes"]["id"]}}" @endif>
                                     <template slot="descr">{{$events[$i]["event"]["attributes"]["description"]}}   </template>
                                 </termin-box>
                                 <br>

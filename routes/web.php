@@ -23,29 +23,38 @@ Route::domain('api.learnable.ch')->group(function () {
 });
 
 
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/class', 'ClassmemberViewController@index')->name('class');
-Route::get('/teachers', 'TeacherController@table')->name('teachers');
-Route::prefix('events')->group(function () {
-    Route::get('/', 'EventViewController@index')->name('eventlist');
-    Route::get('edit/{id}', 'EventViewController@edit');
-    Route::post('edit/{id}', 'EventViewController@update');
-    Route::post('delete/{id}', 'EventController@delete');
-});
-
-Route::get('/changePW', 'UserController@editPW')->name('editpw');
-Route::post('/changePW', 'UserController@updatePW')->name('updatepw');
 
 Route::group([
-    'middleware' => 'isAdmin'
-], function (){
-    Route::prefix('edit')->group(function () {
-       Route::get('/user/{user}', 'UserController@edit')->name('edituser');
-        Route::post('/user/{id}', 'UserController@update')->name('updateuser');
+    'middleware' => 'auth'
+], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('test/{id}', 'EventMemberController@getNames');
+
+    Route::get('/class', 'ClassmemberViewController@index')->name('class');
+    Route::get('/teachers', 'TeacherController@table')->name('teachers');
+    Route::prefix('events')->group(function () {
+        Route::get('/', 'EventViewController@index')->name('eventlist');
+        Route::get('edit/{id}', 'EventViewController@edit')->middleware('isCreator');;
+        Route::post('edit/{id}', 'EventViewController@update');
+        Route::post('delete/{id}', 'EventController@delete');
     });
 
+    Route::get('/changePW', 'UserController@editPW')->name('editpw');
+    Route::post('/changePW', 'UserController@updatePW')->name('updatepw');
 
+    Route::group([
+        'middleware' => 'isAdmin'
+    ], function (){
+        Route::prefix('edit')->group(function () {
+            Route::get('/user/{user}', 'UserController@edit')->name('edituser');
+            Route::post('/user/{id}', 'UserController@update')->name('updateuser');
+        });
+
+
+    });
 });
+

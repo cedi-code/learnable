@@ -34,6 +34,7 @@
 
             }
         },
+
         props: {
             users: {
                 type: Array,

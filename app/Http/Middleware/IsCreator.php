@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Events;
+use Illuminate\Support\Facades\Redirect;
 
 class IsCreator
 {
@@ -18,8 +19,8 @@ class IsCreator
     public function handle($request, Closure $next)
     {
         $id =  $request->route('id');
-        if(!$request->user()->is_admin || Events::find($id)->creator != $request->user()->id ){
-            return response()->json(0, 403);
+        if(!$request->user()->is_admin && Events::find($id)->creator != $request->user()->id ){
+            return Redirect::route('eventlist' );
         }
         return $next($request);
     }

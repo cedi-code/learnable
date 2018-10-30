@@ -1,7 +1,7 @@
 <template>
     <section>
 
-        <b-collapse class="card" :open="false">
+        <b-collapse class="card" v-on:open="onOpen()" :open="false">
             <div slot="trigger" slot-scope="props" class="card-header">
                 <div class="card-header-icon">
 
@@ -20,7 +20,15 @@
             <div class="card-content" >
                 <div class="content">
                     <slot name="descr"></slot>
+                    <br/>
+                    <div class="box" v-if="isCreator">
+                        <h6>Mitglieder:</h6>
+                        <group-box  v-if="isCreator"  :content="members" ></group-box>
+                    </div>
                 </div>
+
+
+
             </div>
             <footer class="card-footer">
                 <a class="card-footer-item">Stundenplan</a>
@@ -40,12 +48,15 @@
 </template>
 
 <script>
+
+
     export default {
         name: "termin-box",
         data () {
             return {
                 showDetail : false,
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                members: []
             }
         },
         props: {
@@ -60,9 +71,19 @@
             },
             id: {
                 type: Number
-            }
+            },
+
         },
         methods: {
+            onOpen() {
+                if(this.isCreator) {
+                    axios.get('/test/' + this.id)
+                        .then((response) => {
+                            this.members = response.data
+                        })
+                }
+
+            },
             confirmCustomDelete() {
                 this.$dialog.confirm({
                     title: 'Errinnerung Löschen',
@@ -86,4 +107,5 @@
     .content p:not(:last-child) {
         margin-bottom: 0;
     }
+
 </style>

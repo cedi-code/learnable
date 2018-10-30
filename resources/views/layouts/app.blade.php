@@ -107,9 +107,7 @@
                                     <li class="navbar-item">
                                         <a>Erstellen</a>
                                     </li>
-                                    <li class="navbar-item">
-                                        <a> Gruppe Erstellen</a>
-                                    </li>
+                                    <create-group></create-group>
                                     <li class="navbar-item">
                                         <a href="{{ route('eventlist') }}"> Liste</a>
                                     </li>

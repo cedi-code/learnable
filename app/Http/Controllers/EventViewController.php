@@ -31,11 +31,20 @@ class EventViewController extends Controller
             ];
 
         }
+        /*$membersId = Eventmembers::select('user')->where("event", $id)->get();
+
+        $members = [];
+
+        for($u = 0; $u < count($membersId); $u++ ) {
+            $members[$u] = User::find($membersId[$u]['user']);
+
+        }*/
+
 
         $data = [
             "eventsOwner" => $eventOwner,
             "eventsMember" => $eventMember,
-            "id" =>  Auth::user()->id
+            "id" =>  Auth::user()->id,
         ];
         return view('eventlist')->with($data);
     }
@@ -72,20 +81,19 @@ class EventViewController extends Controller
 
         // TODO bearbeite mues no gah vom Event!!!
 
-            Events::where("id", $id)->update([
-                'type' => $request->type,
-                'lesson' => $request->lesson,
-                'title' => $request->title,
-                'description' => $request->description
-            ]);
+        Events::where("id", $id)->update([
+            'type' => $request->type,
+            'lesson' => $request->lesson,
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
 
         $eventM = Eventmembers::select('user')->where("event", $id)->get();
         $newuid = explode(",", $request->members);
-        if(count($newuid) != count($eventM)) {
+        if(count($newuid) != count($eventM) || !in_array($eventM[count($eventM)-1]->user, $newuid)) {
 
             // checks if a members is removed
             $olduid = [];
-
             for($m = 0; $m < count($eventM); $m++) {
                 $olduid[$m] = $eventM[$m]->user;
                 if(!in_array($olduid[$m], $newuid)) {

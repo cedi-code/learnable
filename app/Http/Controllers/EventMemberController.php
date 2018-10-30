@@ -7,6 +7,7 @@ use App\Eventmembers;
 use Illuminate\Support\Facades\Validator;
 use App\Events;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class EventMemberController extends Controller
 {
@@ -51,12 +52,23 @@ class EventMemberController extends Controller
     public function getRaw() {
         return Eventmembers::all();
     }
+    public function getNames($id) {
+        $membersId = Eventmembers::select('user')->where("event", $id)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        $members = [];
+
+        for($u = 0; $u < count($membersId); $u++ ) {
+            $members[$u] = User::find($membersId[$u]['user']);
+
+        }
+        return $members;
+}
+
+/**
+* Show the form for creating a new resource.
+*
+* @return \Illuminate\Http\Response
+*/
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), $this->rules);

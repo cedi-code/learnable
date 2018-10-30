@@ -12385,6 +12385,7 @@ Vue.component('user-tile', __webpack_require__(56));
 Vue.component('termin-box', __webpack_require__(61));
 Vue.component('table-box', __webpack_require__(66));
 Vue.component('group-box', __webpack_require__(71));
+Vue.component('create-group', __webpack_require__(83));
 Vue.component('tag-user', __webpack_require__(76));
 
 var app = new Vue({
@@ -70561,7 +70562,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.content p[data-v-615f8c73]:not(:last-child) {\n    margin-bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\n.content p[data-v-615f8c73]:not(:last-child) {\n    margin-bottom: 0;\n}\n\n", ""]);
 
 // exports
 
@@ -70613,13 +70614,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "termin-box",
     data: function data() {
         return {
             showDetail: false,
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            members: []
         };
     },
 
@@ -70636,10 +70647,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         id: {
             type: Number
         }
+
     },
     methods: {
-        confirmCustomDelete: function confirmCustomDelete() {
+        onOpen: function onOpen() {
             var _this = this;
+
+            if (this.isCreator) {
+                axios.get('/test/' + this.id).then(function (response) {
+                    _this.members = response.data;
+                });
+            }
+        },
+        confirmCustomDelete: function confirmCustomDelete() {
+            var _this2 = this;
 
             this.$dialog.confirm({
                 title: 'Errinnerung Löschen',
@@ -70647,7 +70668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 confirmText: 'Löschen',
                 type: 'is-danger',
                 onConfirm: function onConfirm() {
-                    return _this.deleteSubmit();
+                    return _this2.deleteSubmit();
                 }
             });
         },
@@ -70674,6 +70695,11 @@ var render = function() {
         {
           staticClass: "card",
           attrs: { open: false },
+          on: {
+            open: function($event) {
+              _vm.onOpen()
+            }
+          },
           scopedSlots: _vm._u([
             {
               key: "trigger",
@@ -70706,7 +70732,31 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "card-content" }, [
-            _c("div", { staticClass: "content" }, [_vm._t("descr")], 2)
+            _c(
+              "div",
+              { staticClass: "content" },
+              [
+                _vm._t("descr"),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm.isCreator
+                  ? _c(
+                      "div",
+                      { staticClass: "box" },
+                      [
+                        _c("h6", [_vm._v("Mitglieder:")]),
+                        _vm._v(" "),
+                        _vm.isCreator
+                          ? _c("group-box", { attrs: { content: _vm.members } })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
           _c("footer", { staticClass: "card-footer" }, [
@@ -71269,23 +71319,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71322,9 +71355,7 @@ var render = function() {
                 { attrs: { field: "last_name", label: "Id", width: "60" } },
                 [
                   _vm._v(
-                    "\n            " +
-                      _vm._s(props.row.userdata.username) +
-                      "\n        "
+                    "\n            " + _vm._s(props.row.username) + "\n        "
                   )
                 ]
               ),
@@ -71335,9 +71366,9 @@ var render = function() {
                 [
                   _vm._v(
                     "\n            " +
-                      _vm._s(props.row.userdata.last_name) +
+                      _vm._s(props.row.last_name) +
                       " " +
-                      _vm._s(props.row.userdata.first_name) +
+                      _vm._s(props.row.first_name) +
                       "\n        "
                   )
                 ]
@@ -71354,32 +71385,6 @@ var render = function() {
             "div",
             { staticClass: "content has-text-grey has-text-centered" },
             [_c("p", [_vm._v("Nothing here.")])]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("template", { slot: "footer" }, [
-        _c("div", { staticClass: "has-text-right " }, [
-          _c(
-            "a",
-            { staticClass: "button is-danger" },
-            [
-              _c("b-icon", { attrs: { icon: "minus" } }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Remove Members")])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            { staticClass: "button is-success" },
-            [
-              _c("b-icon", { attrs: { icon: "plus" } }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Add Members")])
-            ],
-            1
           )
         ])
       ])
@@ -71485,6 +71490,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         };
     },
+
 
     props: {
         users: {
@@ -71604,6 +71610,239 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(84)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(86)
+/* template */
+var __vue_template__ = __webpack_require__(87)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5a2b16be"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/gruppeErstellen.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a2b16be", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a2b16be", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(85);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("6a50c61c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a2b16be\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./gruppeErstellen.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a2b16be\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./gruppeErstellen.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "gruppe-erstellen",
+    data: function data() {
+        return {
+            isImageModalActive: false
+        };
+    },
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "li",
+    { staticClass: "navbar-item" },
+    [
+      _c(
+        "a",
+        {
+          on: {
+            click: function($event) {
+              _vm.isImageModalActive = true
+            }
+          }
+        },
+        [_vm._v(" Gruppe Erstellen")]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: { active: _vm.isImageModalActive },
+          on: {
+            "update:active": function($event) {
+              _vm.isImageModalActive = $event
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-content" }, [
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column" },
+                  [
+                    _c("b-icon", {
+                      attrs: {
+                        icon: "account-multiple",
+                        size: "is-large",
+                        type: "is-primary"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Bestehnder Termin auswählen")])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "column" },
+                  [
+                    _c("b-icon", {
+                      attrs: {
+                        icon: "account-multiple-plus",
+                        size: "is-large",
+                        type: "is-primary"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("h3", [_vm._v("Neuer Termin erstellen")])
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a2b16be", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
