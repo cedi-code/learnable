@@ -10,7 +10,7 @@ _if problems show up while running the ``` php artisan serve ``` command,_<br />
 4. Generate a Key like: ``` php artisan key:generate```
 <br/>
 <br/>
-And at the end the command
+Finally, the command
 
 ``` php artisan serve ```
 
@@ -25,7 +25,7 @@ if problems show up running the ``` npm run watch ``` command, <br />**_follow t
 
 2. Run: ``` npm rebuild ```
 
-And at the end, the command 
+Finally, the command
 
 
 ``` npm run watch ``` 
