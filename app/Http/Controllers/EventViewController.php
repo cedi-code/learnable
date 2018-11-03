@@ -20,14 +20,33 @@ class EventViewController extends Controller
 
     public function index(Request $request)
     {
-        $events = app('App\Http\Controllers\EventController')->index($request);
-        $eventOwner = Events::select('id','type', 'lesson','creator', 'title', 'description')->where("creator", $request->user()->id)->get();
+        // $events = app('App\Http\Controllers\EventController')->index($request);
+        // $eventOwner = Events::select('id','type', 'lesson','creator', 'title', 'description')->where("creator", $request->user()->id)->get();
+
+        $eventOwner = DB::table('events')
+            ->join('lessons', 'events.lesson', '=', 'lessons.id')
+            ->join('users', 'events.creator', '=', 'users.id')
+            ->join('event_types', 'events.type', '=', 'event_types.id')
+            ->join('courses as c', 'lessons.course', '=', 'c.id')
+            ->select('events.id','events.title','events.description','users.username as creator','lessons.start','event_types.type' , 'c.title as course')
+            ->where("creator", $request->user()->id)
+            ->get();
+
+
+        //dd($eventOwner);
 
         $eventMember = [];
         $eventsIsMember =  Eventmembers::select('event')->where("user", $request->user()->id)->get();
         foreach ($eventsIsMember as $event) {
             $eventMember[] = [
-                'event' => Events::select('id','type', 'lesson','creator', 'title','description')->where("id", $event->event)->get()[0]
+                'event' => DB::table('events')
+                    ->join('lessons', 'events.lesson', '=', 'lessons.id')
+                    ->join('users', 'events.creator', '=', 'users.id')
+                    ->join('event_types', 'events.type', '=', 'event_types.id')
+                    ->join('courses as c', 'lessons.course', '=', 'c.id')
+                    ->select('events.id','events.title','events.description','users.username as creator','lessons.start','event_types.type' , 'c.title as course')
+                    ->where("events.id", $event->event)
+                    ->get()[0]
             ];
 
         }

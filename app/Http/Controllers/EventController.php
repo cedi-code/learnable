@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Events;
 use App\Eventmembers;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use App\Lessons;
+use stdClass;
 
 class EventController extends Controller
 {
@@ -50,6 +53,18 @@ class EventController extends Controller
         return Events::all();
     }
 
+    public function getMyEvents() {
+        $eventOwner = Events::select('id','type', 'lesson', 'title')->where("creator", Auth::id())->get();
+
+        foreach ($eventOwner as $eventO) {
+            $obj = new stdClass();
+            $obj->title = $eventO->title;
+            $obj->id = $eventO->id;
+            $obj->lesson = Lessons::find($eventO->lesson)->get()[0]["start"];
+            $data2[] = json_encode($obj);
+        }
+        return $data2;
+    }
     /**
      * Show the form for creating a new resource.
      *

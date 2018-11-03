@@ -19,6 +19,7 @@ class Events extends Model
         'description'
     ];
 
+
     const UPDATED_AT = null;
     const CREATED_AT = null;
 }

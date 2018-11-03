@@ -19,7 +19,36 @@
             </div>
             <div class="card-content" >
                 <div class="content">
-                    <slot name="descr"></slot>
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Art</p>
+                                <p  ><slot name="eventtype"></slot></p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Fach</p>
+                                <p ><slot name="lessontype"></slot></p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Datum</p>
+                                <p ><slot name="date"></slot></p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">Ersteller</p>
+                                <p ><slot name="creator"></slot></p>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="box" >
+                        <slot name="descr"></slot>
+                    </div>
+
                     <br/>
                     <div class="box" v-if="isCreator">
                         <h6>Mitglieder:</h6>
@@ -77,7 +106,7 @@
         methods: {
             onOpen() {
                 if(this.isCreator) {
-                    axios.get('/test/' + this.id)
+                    axios.get('/eventusers/' + this.id)
                         .then((response) => {
                             this.members = response.data
                         })

@@ -32,7 +32,9 @@ Route::group([
 ], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('test/{id}', 'EventMemberController@getNames');
+    Route::get('eventusers/{id}', 'EventMemberController@getNames');
+
+    Route::get('eventlist', 'EventController@getMyEvents');
 
     Route::get('/class', 'ClassmemberViewController@index')->name('class');
     Route::get('/teachers', 'TeacherController@table')->name('teachers');
