@@ -28,7 +28,25 @@ class HomeController extends Controller
     {
         $mytime = Carbon::now();
         $events = app('App\Http\Controllers\EventController')->index($request);
-        $lessons = app('App\Http\Controllers\LessonController')->index($request);
+        $lessons = app('App\Http\Controllers\LessonController')->getWeek($request, 42);
+
+
+        $week = [[]];
+        $day = 0;
+        $lekts = 0;
+        for($b = 1; $b < sizeof($lessons); $b++) {
+
+            // TODO vergleichen ob die tage gleich sind. Convert day time
+            if($lessons[$b-1]["attributes"]["start"] == $lessons[$b]["attributes"]["start"]) {
+                $week[$day][$lekts] = $lessons[$b-1]["attributes"]["start"];
+                $lekts++;
+            }else {
+                $day++;
+                $lekts = 0;
+            }
+
+        }
+        dd($week);
 
         $data = [
             "time" =>  $mytime->toDateTimeString(),

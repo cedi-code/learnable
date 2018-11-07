@@ -50,6 +50,7 @@ class LessonController extends Controller
     public function getRaw() {
         return Lessons::all();
     }
+
     public function getWeek(Request $request,$id) {
         $y = date("Y");
         $monday = $this->getWeekDates($y,$id,true);

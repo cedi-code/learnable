@@ -39,25 +39,19 @@
                 <p class="title">Stundenplan</p>
                 <p class="subtitle">Heute ist der {{$time}}</p>
                 <div class="content">
+
                     <div class="tile is-ancestor">
-                        @for ($i = 0; $i < 5; $i++)
-                        <div class="tile is-vertical is-1.5">
-                            <div class="tile">
-                                <div class="tile is-parent is-vertical">
-                                    <article class="tile is-child notification is-primary">
-                                        <p class="title">Vertical...</p>
-                                        <p class="subtitle">Top tile</p>
 
-                                    </article>
-                                    <article class="tile is-child notification is-warning">
-                                        <p class="title">...tiles</p>
-                                        <p class="subtitle">Bottom tile</p>
-                                    </article>
-
+                            <div class="columns is-mobile">
+                                @for ($i = 0; $i < sizeof($weeks); $i++)
+                                <div class="column">
+                                    @for($d = 0; $d < sizeof($weeks[$i]); $d++)
+                                        {{$weeks[$i][$d]["attributes"]["start"]}}
+                                    @endfor
                                 </div>
+                                @endfor
                             </div>
-                        </div>
-                        @endfor
+
 
 
                     </div>
