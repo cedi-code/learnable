@@ -44,9 +44,13 @@
 
                             <div class="columns is-mobile">
                                 @for ($i = 0; $i < sizeof($weeks); $i++)
-                                <div class="column">
+                                <div class="column is-narrow">
                                     @for($d = 0; $d < sizeof($weeks[$i]); $d++)
-                                        {{$weeks[$i][$d]["attributes"]["start"]}}
+                                        <div class="box lesson @if($weeks[$i][$d]["duration"] == 2) duration2 @else duration1 @endif">
+                                            <p class="title is-5">{{$weeks[$i][$d]["course"]}}</p>
+                                            <p class="subtitle"></p>
+                                        </div>
+
                                     @endfor
                                 </div>
                                 @endfor

@@ -14432,6 +14432,19 @@ button {
   text-transform: uppercase;
 }
 
+.lesson {
+  width: 200px;
+  overflow: hidden;
+}
+
+.duration1 {
+  height: 100px;
+}
+
+.duration2 {
+  height: 225px;
+}
+
 a {
   color: #C0495E;
 }
