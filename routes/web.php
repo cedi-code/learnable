@@ -36,6 +36,8 @@ Route::group([
 
     Route::get('eventlist', 'EventController@getMyEvents');
 
+    Route::get('lessons', 'HomeController@showLesson')->name('lessons');
+
     Route::get('/class', 'ClassmemberViewController@index')->name('class');
     Route::get('/teachers', 'TeacherController@table')->name('teachers');
     Route::prefix('events')->group(function () {
