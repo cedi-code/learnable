@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Courses;
+use App\Events;
 
 class HomeController extends Controller
 {
@@ -34,7 +35,7 @@ class HomeController extends Controller
         $data = [
             "time" =>  $mytime->toDateTimeString(),
             "events" => $events,
-            "weeks" => $this->getLessonToDays($request, 42),
+            "weeks" => $this->getLessonToDays($request, 42), // $mytime->weekOfYear
             "id" =>  Auth::user()->id
         ];
         return view('home')->with($data);
@@ -49,8 +50,12 @@ class HomeController extends Controller
         return view('lessonTable')->with($data);
     }
 
+
+
     private function getLessonToDays(Request $request,$weekNumber) {
         $lessons = app('App\Http\Controllers\LessonController')->getWeek($request, $weekNumber);
+
+        $events = app('App\Http\Controllers\EventController')->index($request);
 
 
         $week = [[]];
@@ -63,16 +68,47 @@ class HomeController extends Controller
 
                 $week[$day][$lekts] = $lessons[$b-1]["attributes"];
                 $week[$day][$lekts]["course"] = Courses::find($week[$day][$lekts]["course"])->title;
+                $week[$day][$lekts]["events"] = array();
+                // holt die events von der Lektion
+                $ee = 0;
+                for($eb = 0; $eb < sizeof($events); $eb++) {
+
+
+                    if($events[$eb]["event"]["attributes"]["lesson"] == $lessons[$b-1]["attributes"]["id"]) {
+
+
+                        array_push(   $week[$day][$lekts]["events"], $events[$eb]["event"]["attributes"]);
+                        $ee++;
+                    }
+
+                }
+
+
+
                 $lekts++;
             }else {
                 $week[$day][$lekts] = $lessons[$b-1]["attributes"];
                 $week[$day][$lekts]["course"] = Courses::find($week[$day][$lekts]["course"])->title;
+                $week[$day][$lekts]["events"] = array();
+                $ee = 0;
+                for($eb = 0; $eb < sizeof($events); $eb++) {
+
+                    if($events[$eb]["event"]["attributes"]["lesson"] == $lessons[$b-1]["attributes"]["id"]) {
+
+
+                        array_push(   $week[$day][$lekts]["events"], $events[$eb]["event"]["attributes"]);
+                        $ee++;
+
+                    }
+
+                }
                 $day++;
                 $lekts = 0;
             }
 
 
         }
+
         return $week;
     }
 }

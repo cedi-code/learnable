@@ -16,7 +16,13 @@
                                 @if($dd == $weeks[$i][$d]["start_lesson"])
                             <div class="box lesson @if($weeks[$i][$d]["duration"] == 2) duration2 @else duration1 @endif">
                                 <p class="title is-5">{{$weeks[$i][$d]["course"]}}</p>
-                                <p class="subtitle"></p>
+
+                                @if( ! empty($weeks[$i][$d]["events"]))
+                                    @for($le = 0; $le < sizeof($weeks[$i][$d]["events"]);$le++)
+                                        <b-tag>{{$weeks[$i][$d]["events"][$le]["title"]}}</b-tag>
+                                    @endfor
+                                @endif
+
                             </div>
 
                                 @php

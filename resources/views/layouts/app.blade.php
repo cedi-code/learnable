@@ -114,7 +114,7 @@
                                 </ul>
                             </li>
                             <li class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-item">
+                                <a class="navbar-item" href="{{ route('lessons') }}">
                                     Stundenplan
                                 </a>
                             </li>
