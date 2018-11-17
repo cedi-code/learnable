@@ -105,7 +105,7 @@
                                 </a>
                                 <ul class="navbar-dropdown">
                                     <li class="navbar-item">
-                                        <a>Erstellen</a>
+                                        <a href="{{ route('addevent') }}">Erstellen</a>
                                     </li>
                                     <create-group></create-group>
                                     <li class="navbar-item">

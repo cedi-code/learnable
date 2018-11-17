@@ -14,14 +14,18 @@
                             </b-icon>
                             <h3>Bestehnder Termin auswählen</h3>
                         </div>
+
                         <div class="column">
+                            <a href="/events/add">
                             <b-icon
                                     icon="account-multiple-plus"
                                     size="is-large"
                                     type="is-primary">
                             </b-icon>
+                            </a>
                             <h3>Neuer Termin erstellen</h3>
                         </div>
+
                     </div>
 
                     <b-table v-if="!decide"
@@ -86,9 +90,9 @@
               axios.get('/eventlist/')
                   .then((response) => {
                       for(var i = 0; i < response.data.length; i++) {
-                          this.content[i] = JSON.parse(response.data);
-                      }
+                          this.content[i] = JSON.parse(response.data[i]);
 
+                      }
                   })
           }
 

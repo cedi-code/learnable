@@ -38,13 +38,18 @@ Route::group([
 
     Route::get('lessons', 'HomeController@showLesson')->name('lessons');
 
+    Route::get('lessonday/{day}', 'LessonController@showDay')->name('day');
+
     Route::get('/class', 'ClassmemberViewController@index')->name('class');
     Route::get('/teachers', 'TeacherController@table')->name('teachers');
     Route::prefix('events')->group(function () {
         Route::get('/', 'EventViewController@index')->name('eventlist');
+        Route::get('/add', 'EventViewController@add')->name('addevent');
         Route::get('edit/{id}', 'EventViewController@edit')->middleware('isCreator');;
         Route::post('edit/{id}', 'EventViewController@update');
         Route::post('delete/{id}', 'EventController@delete');
+        Route::post('create', 'EventViewController@create');
+
     });
 
     Route::get('/changePW', 'UserController@editPW')->name('editpw');

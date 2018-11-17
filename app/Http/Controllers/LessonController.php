@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Lessons;
 use App\Classmembers;
 use Illuminate\Support\Facades\Validator;
+use App\Courses;
+use stdClass;
 
 class LessonController extends Controller
 {
@@ -56,10 +58,17 @@ class LessonController extends Controller
         $monday = $this->getWeekDates($y,$id,true);
         $sunday = $this->getWeekDates($y,$id,false);
 
+
+        return $this->getLessonFrom($request,$monday,$sunday);
+
+
+    }
+
+    public function getLessonFrom(Request $request, $start,$end) {
         if($request->user()->is_teacher) {
             return Lessons::where('teacher',$request->user()->id)
-                ->where('start', '>', $monday)
-                ->where('end', '<=',$sunday )
+                ->where('start', '>', $start)
+                ->where('end', '<=',$end )
                 ->get();
         }else  {
             $data2 = [];
@@ -69,12 +78,10 @@ class LessonController extends Controller
             }
 
             return Lessons::whereIn('class',$data2)
-                ->where('start', '>', $monday)
-                ->where('end', '<=',$sunday )
+                ->where('start', '>', $start)
+                ->where('end', '<=',$end )
                 ->get();
         }
-
-
     }
 
     function getWeekDates($year, $week, $start=true)
@@ -88,6 +95,28 @@ class LessonController extends Controller
             return $to;
         }
         //return "Week {$week} in {$year} is from {$from} to {$to}.";
+    }
+
+    function showDay(Request $request,$day) {
+
+
+        $phpDate = date('Y-m-d', strtotime($day));
+        $stop_date = date('Y-m-d', strtotime($day . ' +1 day'));
+
+
+        $lessonDay = $this->getLessonFrom($request,$phpDate,$stop_date);
+
+        foreach ($lessonDay as $lesson) {
+            $obj = new stdClass();
+            $obj->id = $lesson->id;
+            $obj->duration = $lesson->duration;
+            $obj->start = date('H:i', strtotime($lesson->start));
+            $obj->end = date('H:i', strtotime($lesson->end));
+            $obj->course = Courses::where('id',$lesson->course)->get()[0]["title"];
+
+            $data2[] = json_encode($obj);
+        }
+        return $data2;
     }
     /**
      * Show the form for creating a new resource.

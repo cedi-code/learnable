@@ -60,7 +60,7 @@ class EventController extends Controller
             $obj = new stdClass();
             $obj->title = $eventO->title;
             $obj->id = $eventO->id;
-            $obj->lesson = Lessons::find($eventO->lesson)->get()[0]["start"];
+            $obj->lesson = Lessons::where('id',$eventO->lesson)->get()[0]["start"];
             $data2[] = json_encode($obj);
         }
         return $data2;

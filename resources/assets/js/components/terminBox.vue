@@ -53,6 +53,7 @@
                     <div class="box" v-if="isCreator">
                         <h6>Mitglieder:</h6>
                         <group-box  v-if="isCreator"  :content="members" ></group-box>
+                        <b-loading  :active.sync="isLoading" :is-full-page="isFullPage" ></b-loading>
                     </div>
                 </div>
 
@@ -85,7 +86,9 @@
             return {
                 showDetail : false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                members: []
+                members: [],
+                isLoading: false,
+                isFullPage: false,
             }
         },
         props: {
@@ -105,12 +108,18 @@
         },
         methods: {
             onOpen() {
+                this.isLoading = true
                 if(this.isCreator) {
+
                     axios.get('/eventusers/' + this.id)
                         .then((response) => {
                             this.members = response.data
                         })
+
                 }
+                setTimeout(() => {
+                    this.isLoading = false
+                }, 100)
 
             },
             confirmCustomDelete() {

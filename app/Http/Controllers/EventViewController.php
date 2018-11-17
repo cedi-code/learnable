@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
+
 class EventViewController extends Controller
 {
     public function __construct()
@@ -92,6 +93,67 @@ class EventViewController extends Controller
         ];
         return view('editevent')->with($data);
     }
+
+    public function add(Request $request) {
+
+
+        $classmembers = app('App\Http\Controllers\ClassmemberController')->index($request);
+        $fuu = [];
+        for($m = 0; $m < count($classmembers[0]["members"]); $m++ ) {
+            $fuu[$m] = User::find($classmembers[0]["members"][$m])[0];
+        }
+
+        $data = [
+            "types" => Event_types::select('type','id')->get(),
+            "users" => $fuu,
+
+        ];
+        return view('createevent')->with($data);
+
+    }
+
+    public function create(Request $request) {
+
+
+            $this->validate($request,[
+                'type' => 'required',
+                'lesson' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+            ]);
+
+
+
+            $event = new Events([
+                'type' => $request->type,
+                'lesson' => $request->lesson,
+                'creator' => $request->user()->id,
+                'title' => $request->title,
+                'description' => $request->description
+            ]);
+            $event->save();
+
+            if(isset($request->members)) {
+                $newuid = explode(",", $request->members);
+                for($m = 0; $m < count($newuid); $m++ ) {
+
+                    $eventmember = new Eventmembers([
+                        'user' => $newuid[$m],
+                        'event' => $event->id
+
+                    ]);
+                    $eventmember->save();
+                }
+            }
+
+
+
+            //$eventM = Eventmembers::select('user')->where("event", $id)->get();
+
+
+            return Redirect::route('eventlist',  array('create=ok'));
+        }
+
 
     public function update(Request $request,$id) {
 
