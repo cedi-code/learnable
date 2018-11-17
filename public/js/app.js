@@ -72011,7 +72011,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "li",
-    { staticClass: "navbar-item" },
     [
       _c(
         "a",

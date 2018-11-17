@@ -3,6 +3,28 @@
 @section('content')
     <div class="container">
         <div class="notification">
+            <article class="media w100" >
+            <figure class="media-left">
+                <a href="/lessons/{{$number-1}}">
+                    <button class="button is-dark">
+                        <b-icon pack="fas" icon="arrow-left"></b-icon>
+                        <span>Woche {{$number-1}}</span>
+                    </button>
+                </a>
+            </figure>
+                <div class="media-content">
+                </div>
+            <figure class="media-right">
+                <a  href="/lessons/{{$number+1}}">
+                    <button class="button is-dark">
+                        <b-icon pack="fas" icon="arrow-right"></b-icon>
+                        <span>Woche {{$number+1}}</span>
+                    </button>
+                </a>
+            </figure>
+            </article>
+
+
             <div class="columns is-mobile">
                 @for ($i = 0; $i < sizeof($weeks); $i++)
                     <div class="column is-narrow">

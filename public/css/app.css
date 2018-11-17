@@ -6645,7 +6645,7 @@ a.dropdown-item.is-active,
 }
 
 .menu-list li ul {
-  border-left: 1px solid #dbdbdb;
+  border-left: 3px solid #E7CBE7;
   margin: 0.75em;
   padding-left: 0.75em;
 }
@@ -14344,6 +14344,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#app {
+  background-color: #250F4F;
+}
+
 h1,
 h2 {
   font-weight: lighter;
@@ -14445,6 +14449,10 @@ button {
 .duration2 {
   height: 210px;
   margin: 10px 0  !important;
+}
+
+.w100 {
+  width: 100%;
 }
 
 a {

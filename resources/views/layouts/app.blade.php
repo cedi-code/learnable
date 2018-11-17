@@ -88,9 +88,9 @@
                         </ul>
                         <!--<li class="navbar-item"><a href="{{ route('register') }}">Register</a></li> -->
                 @else
-                    <!-- Right Side Of Navbar -->
+                    <!-- Right Side Of Navbar
                     <ul class="navbar-start">
-                        <!-- Authentication Links -->
+                        <!-- Authentication Links
 
                             <li class="navbar-item">
                                 <a href="{{ route('home') }}"   aria-expanded="false">
@@ -133,7 +133,9 @@
                             </li>
 
 
-                    </ul>
+                    </ul> -->
+
+
                     <ul class="navbar-end">
                         <li class="navbar-item">
                             <a href="{{ route('logout') }}"
@@ -150,8 +152,63 @@
                     @endif
                 </div>
         </nav>
+        <div class="columns is-gapless">
+            @if (!Auth::guest())
+            <div class="column is-one-fifth">
 
-        @yield('content')
+                <aside class="menu" style="background-color: white;padding: 10px">
+                    <p class="menu-label">
+                        Learnable
+                    </p>
+
+                    <ul class="menu-list">
+                        <li>
+                            <a href="{{ route('home') }}"   aria-expanded="false">
+                                {{ Auth::user()->username }} <span class="caret"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('eventlist') }}" class="navbar-item">
+                                Termine
+                            </a>
+                            <ul>
+                                <li >
+                                    <a href="{{ route('addevent') }}">Erstellen</a>
+                                </li>
+                                <create-group></create-group>
+                                <li >
+                                    <a href="{{ route('eventlist') }}"> Liste</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li >
+                            <a  href="{{ route('lessons') }}">
+                                Stundenplan
+                            </a>
+                        </li>
+                        <li >
+                            <a href="{{ route('class') }}">
+                                Klassen
+                            </a>
+                            <ul >
+                                <li >
+                                    <a href="{{ route('class') }}">IM16A</a>
+                                </li>
+                                <li >
+                                    <a href="{{ route('teachers')}}">Lehrkräfte</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </aside>
+            </div>
+            @endif
+            <div class="column">
+                @yield('content')
+            </div>
+
+        </div>
     </div>
 
     <!-- Scripts -->

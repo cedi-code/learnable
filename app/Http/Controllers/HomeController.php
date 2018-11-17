@@ -35,16 +35,26 @@ class HomeController extends Controller
         $data = [
             "time" =>  $mytime->toDateTimeString(),
             "events" => $events,
-            "weeks" => $this->getLessonToDays($request, 42), // $mytime->weekOfYear
+            "weeks" => $this->getLessonToDays($request, $mytime->weekOfYear), //
             "id" =>  Auth::user()->id
         ];
         return view('home')->with($data);
     }
 
     public function showLesson(Request $request) {
+        $mytime = Carbon::now();
+        $data = [
+            "weeks" => $this->getLessonToDays($request, $mytime->weekOfYear),
+            "number" => $mytime->weekOfYear,
+            "id" =>  Auth::user()->id
+        ];
+        return view('lessonTable')->with($data);
+    }
+    public function showWeek(Request $request,$week) {
 
         $data = [
-            "weeks" => $this->getLessonToDays($request, 42),
+            "weeks" => $this->getLessonToDays($request, $week),
+            "number" => $week,
             "id" =>  Auth::user()->id
         ];
         return view('lessonTable')->with($data);

@@ -20,6 +20,7 @@ $primaryDark: #250F4F;
 
 $primary-invert:  #E7CBE7;
 
+$menu-list-border-left: 3px solid $primary-invert;
 
 $colors: (
         "white": ($white, $black),
@@ -45,6 +46,9 @@ body {
   background-color: $primaryDark;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
+}
+#app {
+  background-color: $primaryDark;
 }
 h1, h2 {
   font-weight: lighter;
@@ -136,6 +140,9 @@ button {
   height: 210px;
   margin: 10px 0  !important;
 
+}
+.w100 {
+  width: 100%;
 }
 a {
   color:$primary2;

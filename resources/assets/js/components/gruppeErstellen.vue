@@ -1,5 +1,5 @@
 <template>
-    <li class="navbar-item">
+    <li>
         <a @click="onModal()"> Gruppe Erstellen</a>
 
         <b-modal :active.sync="isImageModalActive">

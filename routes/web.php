@@ -36,6 +36,10 @@ Route::group([
 
     Route::get('eventlist', 'EventController@getMyEvents');
 
+
+
+    Route::get('lessons/{week}', 'HomeController@showWeek')->name('lessons');
+
     Route::get('lessons', 'HomeController@showLesson')->name('lessons');
 
     Route::get('lessonday/{day}', 'LessonController@showDay')->name('day');
