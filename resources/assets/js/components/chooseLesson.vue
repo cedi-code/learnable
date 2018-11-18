@@ -49,10 +49,11 @@
                 isModalActive: false,
                 isLoading: false,
                 content: [],
-                selectedLesson: null,
+
                 minDate: new Date()
             }
         },
+
         methods: {
             showLessons: function() {
                 if(this.datee != null) {
@@ -79,6 +80,11 @@
                 this.selectedLesson = id
                 this.isModalActive = false;
 
+            }
+        },
+        props: {
+            selectedLesson: {
+                default: null
             }
         }
     }

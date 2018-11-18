@@ -1,18 +1,15 @@
 <template>
-    <div class="tile">
-        <div class="tile is-parent is-vertical">
-            <article class="tile media is-child notification is-primary">
+    <div class="userTile">
+            <article class="tile media is-child notification userTile ">
                 <p class="title"><slot name="title"></slot></p>
                 <p class="subtitle"><slot name="under-title"></slot></p>
 
-                  <a href="/changePW" class="icon is-medium" style="float: right; cursor: pointer">
+                  <a href="/changePW" class="icon is-medium" style=" cursor: pointer">
                          <span class="mdi-stack">
                               <i class="mdi mdi-24px mdi-lock-reset"></i>
                          </span>
                     </a>
             </article>
-
-        </div>
 
     </div>
 </template>
@@ -37,5 +34,8 @@
 </script>
 
 <style scoped>
-
+.userTile {
+    background-color: #C0495E;
+    color: white;
+}
 </style>

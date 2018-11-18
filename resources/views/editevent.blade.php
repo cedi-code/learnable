@@ -20,14 +20,12 @@
                     </b-select>
                 </b-field>
 
-                <div class="form-group{{ $errors->has('lesson') ? ' has-error' : '' }}">
-                    <b-field label="Lesson"
-                             type="{{ $errors->has('lesson') ? ' is-danger' : '' }}"
-                             message="{{ $errors->has('lesson') ? $errors->first('lesson') : '' }}"
 
-                    >
-                        <b-input id="lesson" placeholder="1" type="text" name="lesson" value="{{$event->lesson}}" required  readonly></b-input>
-                    </b-field>
+
+                <div class="form-group{{ $errors->has('lesson') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('lesson') ? ' has-error' : '' }}">
+                        <lesson-picker  :selected-lesson="{{$event->lesson}}"></lesson-picker>
+                    </div>
 
                 </div>
 

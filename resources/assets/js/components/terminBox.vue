@@ -66,7 +66,7 @@
 
                 <a  v-if="isCreator" :href="'events/edit/' + this.id" class="card-footer-item">Edit</a>
 
-                <form v-if="isCreator" method="POST" id="deleteFrom" class="card-footer-item" :action="'/events/delete/' + this.id">
+                <form v-if="isCreator" method="POST" v-bind:id="'deleteFrom' + this.id" class="card-footer-item" :action="'/events/delete/' + this.id">
                     <input type="hidden" name="_token" :value="csrf">
                     <a  @click="confirmCustomDelete"   >Delete</a>
                 </form>
@@ -132,7 +132,7 @@
                 })
             },
             deleteSubmit() {
-                document.getElementById("deleteFrom").submit();
+                document.getElementById("deleteFrom"+ this.id).submit();
                 this.$toast.open('Errinnerung wird gelöscht...')
 
             }

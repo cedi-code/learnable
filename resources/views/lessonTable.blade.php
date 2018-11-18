@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="notification">
+
+        <div class="notification has-background-primary lessonBox">
             <article class="media w100" >
             <figure class="media-left">
                 <a href="/lessons/{{$number-1}}">
@@ -72,7 +72,6 @@
                 @endfor
             </div>
         </div>
-    </div>
 
 
 @endsection

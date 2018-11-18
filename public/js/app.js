@@ -70428,7 +70428,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.userTile[data-v-346cc5b0] {\r\n    background-color: #C0495E;\r\n    color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -70439,9 +70439,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -70484,20 +70481,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tile" }, [
-    _c("div", { staticClass: "tile is-parent is-vertical" }, [
-      _c(
-        "article",
-        { staticClass: "tile media is-child notification is-primary" },
-        [
-          _c("p", { staticClass: "title" }, [_vm._t("title")], 2),
-          _vm._v(" "),
-          _c("p", { staticClass: "subtitle" }, [_vm._t("under-title")], 2),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      )
-    ])
+  return _c("div", { staticClass: "userTile" }, [
+    _c(
+      "article",
+      { staticClass: "tile media is-child notification userTile " },
+      [
+        _c("p", { staticClass: "title" }, [_vm._t("title")], 2),
+        _vm._v(" "),
+        _c("p", { staticClass: "subtitle" }, [_vm._t("under-title")], 2),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -70509,7 +70504,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "icon is-medium",
-        staticStyle: { float: "right", cursor: "pointer" },
+        staticStyle: { cursor: "pointer" },
         attrs: { href: "/changePW" }
       },
       [
@@ -70763,7 +70758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         deleteSubmit: function deleteSubmit() {
-            document.getElementById("deleteFrom").submit();
+            document.getElementById("deleteFrom" + this.id).submit();
             this.$toast.open('Errinnerung wird gelöscht...');
         }
     }
@@ -70919,7 +70914,7 @@ var render = function() {
                     staticClass: "card-footer-item",
                     attrs: {
                       method: "POST",
-                      id: "deleteFrom",
+                      id: "deleteFrom" + this.id,
                       action: "/events/delete/" + this.id
                     }
                   },
@@ -71630,10 +71625,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isModalActive: false,
             isLoading: false,
             content: [],
-            selectedLesson: null,
+
             minDate: new Date()
         };
     },
+
 
     methods: {
         showLessons: function showLessons() {
@@ -71658,6 +71654,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.selectedLesson = id;
             this.isModalActive = false;
+        }
+    },
+    props: {
+        selectedLesson: {
+            default: null
         }
     }
 });

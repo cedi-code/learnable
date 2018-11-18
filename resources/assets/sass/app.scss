@@ -126,10 +126,19 @@ button {
 
 }
 .lesson {
-  width: 200px;
+  width: 25vh;
   overflow: hidden;
 
 
+}
+.lessonBox {
+  width: 100%;
+}
+.lessonBox2 {
+  color: white;
+}
+.lessonBox2 .lesson {
+  width: 17vh;
 }
 .duration1 {
   height: 100px;
